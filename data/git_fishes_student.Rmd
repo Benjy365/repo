@@ -53,7 +53,7 @@ This task involves cloning your repository on your computer. Where should we pla
 
 ```{r, answer1, echo=TRUE, eval = FALSE}
 
-## Write your answer here. 
+## GitHub is just a storage, collaboration site in the cloud. There may be a great version backup feature. But the best storage is local, where you'll be able to open it more easily, even without the Internet.
 
 ```
 
@@ -64,7 +64,7 @@ Before moving on you might have noticed that the code block above has a name `an
 >**Question 2**: In the second code block called `answer1` if we change echo = TRUE to echo = FALSE what will happen to the code block `answer1` when you render it?
 
 ```{r answer2, echo=TRUE, eval = FALSE}
-# Write your answer here
+##The rest of the data will be printed and echo will not be printed as an error.
 ```
 
 **Important**: Notice that `eval = FALSE` for many code chunks. When you complete the tasks. Make sure to change these to `TRUE` otherwise you will find your code does not run!
@@ -93,7 +93,7 @@ Write your answer in the code chunk below:
 
 ```{r, loaddata, eval = FALSE, echo=TRUE}
 
-path <- "replace this text with your relative path to a file in the 'data/' folder"
+path <- "OA_activitydat_20190302_BIOL3207.csv"
   
 data <- read_csv(path)
 
@@ -105,7 +105,7 @@ Let's say that you added a new data folder that was inside an output folder (i.e
 
 ```{r, write, eval = FALSE, echo=TRUE}
 
-path <- "replace this text with your relative path"
+path <- "OA_activitydat_20190302_BIOL3207.csv"
 
 write_csv(data, file = path)
 
@@ -116,20 +116,20 @@ write_csv(data, file = path)
 
 We're ready for some coding! Lets do some coding and wrangling of the `OA_activitydat_20190302_BIOL3207.csv` data that we will use for the workshop. Note above, the `loaddata` code chunk should have already written the code to load the data file. At this point, we're assuming it's in your working space. If not, make sure you run the `loaddata` code chunk. 
 
-First, write some code below to remove missing data
+First, write some code below to remove missing data.
 
 ```{r, rmMiss}
-# Code to removing missing data from the `OA_activitydat_20190302_BIOL3207.csv` data frame. 
-
+na.omit(data)
 ```
 
 Second, drop out irrelevant columns and check that there are no spelling issues in `species` and `treatment`. Create a table of summary data that includes: 1) the mean, 2) the standard error and 3) the sample sizes of unique fish across ALL six fish species for each treatment. This will also help you detect any spelling errors. You can use the R package [`flextable`](https://ardata-fr.github.io/flextable-book/) to print out the results in a nice neat format! If you haven't heard about `flextable` spend 10 or so minutes having a look at it's functionality. It's incredible! You'll use this for tables throughout.
 
 ```{r summaryTab}
 # Drop irrelevant columns
-
+new_data <- subset(data,select=-c(loc,comment))
 # Check spelling in species and treatment but also generate a summary table
-
+sorted_word<-names(sort(table(strsplit(tolower(paste(readLines("http://www.norvig.com/big.txt")))))))
+correct<-function(word){c(sorted_words[adist(word,species)<=min(adsit(word,species))])}
 # Use flextable to render the summary table in a tidy format
 
 ```
